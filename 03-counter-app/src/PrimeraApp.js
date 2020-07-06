@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types'
 
 //Funcional components
 const PrimeraApp = ({saludar}) => {
@@ -18,4 +19,7 @@ const PrimeraApp = ({saludar}) => {
     );
 }
 
+PrimeraApp.propType = {
+    saludar: PropTypes.string.isRequired
+}
 export default PrimeraApp;

@@ -6,4 +6,4 @@ import './index.css'
 
 const divRoot = document.querySelector('#root');
 
-ReactDOM.render(<PrimeraApp saludar="hola soy un prop" />,divRoot);
+ReactDOM.render(<PrimeraApp />,divRoot);

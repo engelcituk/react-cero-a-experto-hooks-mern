@@ -2,12 +2,17 @@ import React, { Fragment } from 'react';
 
 //Funcional components
 const PrimeraApp = () => {
-
+    const saludo =  'Hola mundo desde una constante';
+    const objeto = {
+        nombre: 'Juan',
+        edad: 28
+    }
     return (
-        <Fragment> {/* los fragment se pueden poner omitiendo el texto Fragment*/}
-            <h1>Hola mundo</h1>
+        <> {/* los fragment se pueden poner omitiendo el texto Fragment*/}
+            <h1>{saludo}</h1>
+            <pre>objeto {JSON.stringify(objeto, null, 3)}</pre>
             <p>Mi primera aplicación</p>
-        </Fragment>
+        </>
     );
 }
 

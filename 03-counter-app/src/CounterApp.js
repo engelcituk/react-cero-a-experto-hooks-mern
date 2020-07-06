@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types'
 
 //Funcional components
-const CounterApp = ({value}) => {
+const CounterApp = ({value=12}) => {
 
     const [counter, setCounter] = useState(0); //retorna un arreglo []
 
@@ -11,8 +11,17 @@ const CounterApp = ({value}) => {
     const handleAdd = (e) => {
        setCounter( counter + 1);
         // setCounter( (c) => c + 1)
-
     }
+
+    //handleReset
+    const handleReset = (e) => {
+        setCounter( value);
+     }
+
+     //handleSubtract
+    const handleSubtract = (e) => {
+        setCounter( counter - 1);
+     }
 
     return (
         <> 
@@ -20,7 +29,10 @@ const CounterApp = ({value}) => {
         <h2> { counter } </h2>
 
         {/* <button onClick={ (e) => {handleAdd(e)} } >+1</button> */}
-         <button onClick={ (e) => {handleAdd(e)} } >+1</button> {/*simplificado */}
+         <button onClick={ handleAdd } >+1</button> {/*simplificado */}
+         <button onClick={ handleReset } >reset</button> 
+         <button onClick={ handleSubtract } >-1</button> 
+
 
         </>
     );

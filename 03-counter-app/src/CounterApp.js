@@ -6,7 +6,6 @@ const CounterApp = ({value=12}) => {
 
     const [counter, setCounter] = useState(0); //retorna un arreglo []
 
-
     //handleAdd
     const handleAdd = (e) => {
        setCounter( counter + 1);
@@ -41,6 +40,5 @@ const CounterApp = ({value=12}) => {
 CounterApp.propType = {
     value: PropTypes.number
 }
-
 
 export default CounterApp;

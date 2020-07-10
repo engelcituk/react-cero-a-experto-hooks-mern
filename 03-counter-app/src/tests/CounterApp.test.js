@@ -1,13 +1,16 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { shallow } from 'enzyme';
-import CounterApp from '../CounterApp';
+import CounterApp from '../CounterApp'; 
 
 describe('Pruebas en <CounterApp/>', ()=> {
+    let wrapper = shallow( <CounterApp/>);
+
+    beforeEach( ()=> {
+        wrapper = shallow( <CounterApp/>);
+    });
     
      test('debe de mostrar  <CounterApp/> correctamente ', () => {
-
-        const wrapper = shallow( <CounterApp/>);
 
         expect(wrapper).toMatchSnapshot();
      });
@@ -17,7 +20,17 @@ describe('Pruebas en <CounterApp/>', ()=> {
         const wrapper = shallow( <CounterApp value={100}/> );
         const counter = wrapper.find('h2').text().trim();
         expect(counter).toBe('100');
-    }) 
-     
+    });
+
+    test('Debe de incrementar con el botón +1', () => {
+         wrapper.find('button').at(0).simulate('click'); 
+        const counterText = wrapper.find('h2').text().trim();
+        expect(counterText).toBe('11');
+    });
+    test('Debe de restar con el botón 1', () => {
+        wrapper.find('button').at(2).simulate('click'); 
+       const counterText = wrapper.find('h2').text().trim();
+       expect(counterText).toBe('9');
+   });
      
 })

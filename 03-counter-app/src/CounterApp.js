@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types'
 
 //Funcional components
-const CounterApp = ({value=12}) => {
+const CounterApp = ({value=10}) => {
 
-    const [counter, setCounter] = useState(0); //retorna un arreglo []
+    const [counter, setCounter] = useState(value); //retorna un arreglo []
 
     //handleAdd
     const handleAdd = (e) => {
@@ -25,7 +25,7 @@ const CounterApp = ({value=12}) => {
     return (
         <> 
         <h1>CounterApp</h1>
-        <h2> { counter } </h2>
+        <h2> {counter} </h2>
 
         {/* <button onClick={ (e) => {handleAdd(e)} } >+1</button> */}
          <button onClick={ handleAdd } >+1</button> {/*simplificado */}

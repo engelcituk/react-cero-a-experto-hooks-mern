@@ -40,5 +40,4 @@ const CounterApp = ({value=12}) => {
 CounterApp.propType = {
     value: PropTypes.number
 }
-
 export default CounterApp;

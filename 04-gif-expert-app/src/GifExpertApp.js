@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { AddCategory } from './components/AddCategory';
 
 //Funcional components
 const GifExpertApp = () => {
-    //const categories = ['One Punch', 'Dragon Ball','Doctor Stone', 'One Piece'];
     const [categories, setCategories] = useState(['One Punch', 'Dragon Ball','Doctor Stone', 'One Piece']);
 
  
@@ -14,6 +14,7 @@ const GifExpertApp = () => {
     return (
         <> 
             <h1>GifExpertApp</h1>
+            <AddCategory/>
             <hr/>
             <button onClick={ handleAdd }>Agregar</button>
             <ol>

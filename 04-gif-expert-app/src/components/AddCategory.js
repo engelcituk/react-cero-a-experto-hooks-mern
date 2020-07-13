@@ -10,6 +10,7 @@ export const AddCategory = ({setCategories}) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log('handleSubmit trabajando',inputValue);
         if(inputValue.trim().length > 2){
             setCategories( categorias => [inputValue, ...categorias]); 
             setInputValue('');

@@ -3,8 +3,8 @@ import  {AddCategory}  from './components/AddCategory';
 import { GifGrid } from './components/GifGrid';
 
 //Funcional components
-const GifExpertApp = () => {
-    const [categories, setCategories] = useState(['One Piece']);
+const GifExpertApp = ({defaultCategories=[]}) => {
+    const [categories, setCategories] = useState(defaultCategories);
 
  
    /* const handleAdd = (e) => {

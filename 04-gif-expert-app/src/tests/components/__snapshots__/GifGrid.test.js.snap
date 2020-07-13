@@ -1,21 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Pruebas en <GifGrid/> debe de mostrar  <GifGrid/> correctamente  1`] = `
-<Fragment>
-  <h3
-    className="animate__animated animate__flash"
-  >
-    One piece
-  </h3>
-  <p>
-    Cargando
-  </p>
-  <div
-    className="card-grid"
-  />
-</Fragment>
-`;
-
 exports[`Pruebas en el componente <GifGrid/> debe de mostrar  <GifGrid/> correctamente  1`] = `
 <Fragment>
   <h3
@@ -47,6 +31,12 @@ exports[`Pruebas en el componente <GifGrid/> debe de mostrar items cuando se car
       key="ABC"
       title="cualquier titulo"
       url="https://sdgfg.com"
+    />
+    <GifGridItem
+      id="ABC1"
+      key="ABC1"
+      title="cualquier titulo 2"
+      url="https://sdgkdkdfg.com"
     />
   </div>
 </Fragment>

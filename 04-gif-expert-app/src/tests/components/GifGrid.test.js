@@ -24,7 +24,12 @@ describe('Pruebas en el componente <GifGrid/>', ()=> {
                  id: 'ABC',
                  url:'https://sdgfg.com',
                  title:'cualquier titulo'
-             }
+             },
+             {
+                id: 'ABC1',
+                url:'https://sdgkdkdfg.com',
+                title:'cualquier titulo 2'
+            }
          ]
          useFetchGifs.mockReturnValue({
             data: gifs,
@@ -33,11 +38,11 @@ describe('Pruebas en el componente <GifGrid/>', ()=> {
         const category='One piece';
         const wrapper = shallow(<GifGrid category={category} />);
 
-
         expect(wrapper).toMatchSnapshot();
+        expect(wrapper.find('p').exists()).toBe(false);
+        expect(wrapper.find('GifGridItem').length).toBe(gifs.length);
 
-
-     })
+     });
      
      
 })

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import './useEffects.css';
+import { Message } from './Message';
 
 export const SimpleForm = () => {
 
@@ -13,17 +14,17 @@ export const SimpleForm = () => {
 
     // se ejecuta solo una vez cuando el componente es cargado
     useEffect( () => {
-        console.log('hey');
+        //console.log('hey');
     },[]);
 
     //si queremos que se ejecute cada vez que el formulario cambie hacemos uso de otro useEffect
     useEffect( () => {
-        console.log('formState cambió');
+        //console.log('formState cambió');
     },[formState]);
 
      //si queremos que se ejecute cada vez que una parte del formulario cambie (EMAIL) hacemos uso de otro useEffect
      useEffect( () => {
-        console.log('email cambió');
+       // console.log('email cambió');
     },[email]);
 
     const handleInputChange = ({target}) => { //target es e desestructurado (e)
@@ -57,6 +58,8 @@ export const SimpleForm = () => {
                     onChange= {handleInputChange}
                 />
            </div>
+            
+        { (name === '123') && <Message/> }
         </>
     )
 }

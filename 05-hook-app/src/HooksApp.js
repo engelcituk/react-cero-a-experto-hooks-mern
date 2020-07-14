@@ -1,6 +1,6 @@
-import React from 'react'
-
+import React from 'react';
 export const HooksApp = () => {
+
     return (
         <div>
             <h1>HooksApp</h1>

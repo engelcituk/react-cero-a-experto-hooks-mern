@@ -8,7 +8,7 @@ export default function MemoHook() {
     const {counter, increment} = useCounter(1500);
     const [show, setShow] = useState(true);
     
-    const memoProcesoPesado = useMemo(() => procesoPesado(counter), [counter]);
+    const memoProcesoPesado = useMemo(() => procesoPesado(counter), [counter]); //memoriaza algo
 
     return (
         <div>

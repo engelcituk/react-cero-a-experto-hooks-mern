@@ -1,3 +1,16 @@
 body{
     padding: 70px;
 }
+p {
+    cursor: pointer;
+    margin: 0px;
+}
+.list-group-item {
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+}
+
+.complete {
+    text-decoration: line-through;
+}

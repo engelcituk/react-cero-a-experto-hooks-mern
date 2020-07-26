@@ -1,25 +1,39 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import { todoReducer } from './todoReducer';
+import { useForm } from '../../hooks/useForm';
 
 import './styles.css';
 
-const initialState = [{
-    id : new Date().getTime(),
-    description:'Aprender React',
-    done: false
-}];
+
+const init = ( ) => {
+    return JSON.parse(localStorage.getItem('todos')) || []; // regreso la lista parseada desde localstorage o un arreglo vacío
+   
+   /* return [{
+        id : new Date().getTime(),
+        description:'Aprender React',
+        done: false
+    }];*/
+}
 export const TodoApp = () => {
 
-    const [todos, dispatch] = useReducer(todoReducer, initialState);
-
-    console.log(todos);
+    const [todos, dispatch] = useReducer(todoReducer, [], init);
+    
+    const [{description}, handleInputChange, reset] = useForm({ //custom hook para manipular campos de formulario
+        description:''
+    });
+    useEffect(() => {
+        localStorage.setItem('todos', JSON.stringify(todos))
+    }, [todos]);
 
     const hanleSubmit = (e) => {
         e.preventDefault();
-        
+
+        if(description.trim().length <= 1){ //si el campo descripcion es menor o igual a 1, se limpia espacios con trim
+            return;
+        }
         const newTodo = {
             id : new Date().getTime(),
-            description:'Nueva tarea',
+            description,
             done: false
         }
 
@@ -28,8 +42,8 @@ export const TodoApp = () => {
             payload : newTodo
         }
         dispatch(action);
+        reset();//reseteo los campos del formulario
 
-        console.log('nueva tarea');
     }
     return (
         <div>
@@ -66,6 +80,8 @@ export const TodoApp = () => {
                             name="description"
                             placeholder="Indique la tarea a realizar"
                             autoComplete="off"
+                            value={description}
+                            onChange={handleInputChange}
                         />
                         <button
                             type="submit"

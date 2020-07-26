@@ -34,6 +34,13 @@ export const TodoApp = () => {
         //reset();//reseteo los campos del formulario
 
     }
+    const handleToggle = (todoId) => {
+        
+        dispatch({
+            type: 'toggle',
+            payload: todoId
+        });
+    }
     const hanleSubmit = (e) => {
         e.preventDefault();
 
@@ -67,7 +74,11 @@ export const TodoApp = () => {
                                     key={todo.id}
                                     className='list-group-item'
                                 >
-                                <p className="text-center ">{indice +1} {todo.description}</p>
+                                <p
+                                    className={`${todo.done && 'complete'}`} /* si la tarea está hecha aplico la clase css complete, condicion logica and */
+                                    onClick={() => handleToggle(todo.id)} /* para marcar como realizado */
+                                >
+                                {indice +1} {todo.description}</p>
                                 <button
                                     className="btn btn-danger"
                                     onClick={() => handleDelete(todo.id)} /* para borrar */

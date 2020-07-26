@@ -3,7 +3,7 @@ import { useState } from 'react';
 export const useForm = (initialState = {}) => {
     const [values, setValues] = useState(initialState); //values es el valor actual, setStave cuando se vaya a cambiar
 
-    const reset = () => {
+    const reset = () => { 
         setValues(initialState);
     };
     

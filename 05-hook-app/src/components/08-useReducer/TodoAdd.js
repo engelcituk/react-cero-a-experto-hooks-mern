@@ -12,7 +12,7 @@ export const TodoAdd = ({ handleAddTodo }) => {
         if(description.trim().length <= 1){ //si el campo descripcion es menor o igual a 1, se limpia espacios con trim
             return;
         }
-        const newTodo = {
+        const newTodo = { 
             id : new Date().getTime(),
             description,
             done: false

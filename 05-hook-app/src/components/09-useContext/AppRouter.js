@@ -11,7 +11,6 @@ import { AboutScreen } from './AboutScreen';
 import { LoginScreen } from './LoginScreen';
 import { HomeScreen } from './HomeScreen';
 
-
 export const AppRouter = () => {
     return (
         <div>

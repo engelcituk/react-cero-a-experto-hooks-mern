@@ -3,7 +3,7 @@ import { useFetch } from '../../hooks/useFetch';
 import { useCounter } from '../../hooks/useCounter';
 
 import './estilo.css';
-export const MultipleCustomHooks = () => {
+export const MultipleCustomHooks = () => { 
     const {counter, increment} = useCounter(1);
 
     const {loading, data} = useFetch(`https://www.breakingbadapi.com/api/quotes/${counter}`);

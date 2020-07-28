@@ -9,7 +9,7 @@ export const HeroList = ({publisher}) => {
     const heroes = useMemo(() => getHeroesByPublisher(publisher), [publisher]); //si el publisher cambia disparo la función
 
     return (
-        <div className="card-columns">
+        <div className="card-columns animate__animated animate__fadeIn">
             {
                 heroes.map( hero => (
                     <HeroCard

@@ -1,7 +1,5 @@
 import React  from 'react';
 import {mount}  from 'enzyme';
-import { MemoryRouter , Route} from 'react-router-dom';
-import { HeroScreen } from '../../../components/heroes/HeroScreen';
 import { LoginScreen } from '../../../components/login/LoginScreen';
 import { AuthContext } from '../../../auth/AuthContext';
 import { types } from '../../../types/types';
@@ -53,5 +51,4 @@ describe('Pruebas en LoginScreen', () => {
         expect(history.replace).toHaveBeenCalledWith('/dc');
     });
 
-    
 });

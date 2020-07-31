@@ -33,7 +33,7 @@ export const SearchScreen = ({history}) => {
             <div className="row">
                 <div className="col-5">
                     <h4>Search Form</h4>
-                    <hr/>
+                    <hr/> 
                     <form onSubmit={handleSearch}>
                         <input
                             type="text"

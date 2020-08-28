@@ -24,7 +24,7 @@ export const NoteScreen = () => {
 
                 <div className="notes__image">
                     <img
-                        src="https://s2.best-wallpaper.net/wallpaper/2880x1800/1903/Beautiful-sunrise-purple-sky-moon-river-creative-picture_2880x1800.jpg"
+                        src="https://www.vuelaviajes.com/wp-content/2009/07/City-Wallpaper-1.jpg"
                         alt="imagen"
                     />
                 </div>

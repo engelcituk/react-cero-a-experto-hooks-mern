@@ -1,5 +1,5 @@
 import React from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks/useForms';
 import { startLoginEmailPassword, startGoogleLogin } from '../../actions/auth';
@@ -7,6 +7,8 @@ import { startLoginEmailPassword, startGoogleLogin } from '../../actions/auth';
 export const LoginScreen = () => {
 
     const dispatch = useDispatch();
+    const {loading} = useSelector(state => state.ui)
+
 
     const [formValues, handleInputChange ] = useForm({
         email: 'heymundo@gmail.com',
@@ -50,8 +52,7 @@ export const LoginScreen = () => {
                 <button
                     className="btn btn-primary btn-block"
                     type="submit"
-                    
-
+                    disabled={ loading }
                 >
                     Ingresar
                 </button>

@@ -1,5 +1,6 @@
 import { types } from '../types/types';
 import { db } from '../firebase/firebase-config';
+import { activeNote } from '../reducers/notesReducer';
 
 export const starNewNote = (err) => {
     return async (dispatch, getState) => {
@@ -12,7 +13,8 @@ export const starNewNote = (err) => {
 
         const doc = await db.collection(`${uid}/journal/notes`).add(newNote);
 
-        console.log(doc);
+        dispatch( activeNote(doc.id, newNote) );
+        
     }
 };
 

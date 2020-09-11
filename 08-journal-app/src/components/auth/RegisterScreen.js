@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import validator from 'validator';
 
 import { useForm } from '../../hooks/useForms';
-import { startLoginEmailPassword, startGoogleLogin } from '../../actions/auth';
+import { setError, removeError } from '../../actions/ui';
 
 
 export const RegisterScreen = () => {
@@ -29,15 +29,17 @@ export const RegisterScreen = () => {
 
     const isFormValid = () => {
         if(name.trim().length === 0){
-            console.log('nombre es requerido');
+            dispatch( setError('nombre es requerido') )
             return false;
         } else if(!validator.isEmail(email)){
-            console.log('email no es valido');
+            dispatch( setError('email no es valido') )
             return false;
         }else if(password !== password2 || password.length < 5 ){
-            console.log('las contraseñas deben de coincidir y que sea de al menos 5 caracteres');
+            dispatch( setError('Las contraseñas deben de coincidir y que sea de al menos 5 caracteres') )
             return false;
         }
+        dispatch( removeError() )
+
         return true;
     }
 

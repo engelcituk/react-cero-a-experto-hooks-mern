@@ -1,5 +1,6 @@
 import { types } from '../types/types';
 import { db } from '../firebase/firebase-config';
+import { loadNotes } from '../helpers/loadNotes';
 
 export const starNewNote = (err) => {
     return async (dispatch, getState) => {
@@ -25,6 +26,13 @@ export const activeNote = (id, note) => ({
     }
 })
 
+export const startLoadingNotes = (uid) => {
+    return async (dispatch) => {
+        const notes = await loadNotes(uid);
+        dispatch( setNotes(notes) );
+
+    }
+}
 export const setNotes = (notes) => ({
     type : types.notesLoad,
     payload: notes

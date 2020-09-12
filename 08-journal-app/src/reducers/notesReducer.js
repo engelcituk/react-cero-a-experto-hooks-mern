@@ -14,16 +14,13 @@ export const notesReducer = (state = initialState, action) => {
                     ...action.payload
                 }
             }
-    
+        case types.notesLoad:
+            return {
+                ...state,
+                notes: [...action.payload]
+            }
         default:
             return state;
     }
 }
 
-export const activeNote = (id, note) => ({
-    type: types.notesActive,
-    payload : {
-        id,
-        ...note
-    }
-})

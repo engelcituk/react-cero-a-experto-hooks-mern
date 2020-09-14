@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { types } from '../types/types';
 import { db } from '../firebase/firebase-config';
 import { loadNotes } from '../helpers/loadNotes';
+import { fileUPload } from '../helpers/fileUpload';
 
 export const starNewNote = (err) => {
     return async (dispatch, getState) => {
@@ -70,3 +71,14 @@ export const refreshNote = (id, note) => ({
     }
 })
   
+export const startUploading = (file) => {
+
+    return async ( dispatch, getState) => {
+
+        const {active: activeNote} = getState().notes;
+
+        const fileUrl = await fileUPload(file);
+
+        console.log(fileUrl);
+    }
+}

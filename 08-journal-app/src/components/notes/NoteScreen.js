@@ -57,7 +57,7 @@ export const NoteScreen = () => {
                     (
                         <div className="notes__image">
                             <img
-                                src="https://www.vuelaviajes.com/wp-content/2009/07/City-Wallpaper-1.jpg"
+                                src={note.url}
                                 alt="imagen"
                             />
                         </div>

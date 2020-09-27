@@ -41,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "cloudinary": "^1.23.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.4",
     "enzyme-to-json": "^3.5.0"

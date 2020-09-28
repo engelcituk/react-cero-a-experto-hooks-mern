@@ -47,7 +47,7 @@ describe('Pruebas en AppRouter', () => {
 
             user =  userCred.user;
 
-            const wrapper = mount(
+            mount(
                 <Provider store= {store} >
                     <MemoryRouter>
                         <AppRouter/>

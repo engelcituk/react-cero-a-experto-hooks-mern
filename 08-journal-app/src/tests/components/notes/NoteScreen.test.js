@@ -74,7 +74,6 @@ describe('Pruebas en NoteScreen', () => {
                 date: 0
             }
         );
-
         
     })
     

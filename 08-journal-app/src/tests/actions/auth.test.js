@@ -5,9 +5,7 @@ import { logout, login, startLogout, startLoginEmailPassword } from '../../actio
 import { types } from '../../types/types';
 
 const middlewares = [thunk];
-
 const mockStore = configureStore(middlewares);
-
 const initState = {}
 
 let  store = mockStore( initState )

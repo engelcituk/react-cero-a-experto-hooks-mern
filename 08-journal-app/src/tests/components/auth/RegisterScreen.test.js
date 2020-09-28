@@ -36,7 +36,6 @@ const wrapper = mount(
             <RegisterScreen/>
         </MemoryRouter>
     </Provider>
-
 )
 
 describe('Pruebas en el registerScreen', () => {

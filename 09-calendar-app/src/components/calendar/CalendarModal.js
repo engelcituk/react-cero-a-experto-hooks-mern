@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
-
+import Swal from 'sweetalert2';
 //import  'moment/locale/es';
 //moment.locale('es') //cambio el idioma de moment a español
 
@@ -22,22 +22,24 @@ const customStyles = {
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root')
 const now = moment().minutes(0).second(0).add(1,'hours');
-const end = now.clone().add(1, 'hours');
+const endPlus = now.clone().add(1, 'hours');
 
 
 export const CalendarModal = () => {
 
     const [dateStart, setDateStart] = useState( now.toDate() );
-    const [dateEnd, setDateEnd] = useState( end.toDate() );
+    const [dateEnd, setDateEnd] = useState( endPlus.toDate() );
+    const [titleValid, setTitleValid] = useState( true );
+
 
     const [formValues, setFormValues] = useState({
         title: 'Evento',
         notes: '',
-        start:now.toDate(),
-        end: end.toDate()
+        start: now.toDate(),
+        end: endPlus.toDate()
     });
 
-    const {notes, title} = formValues;
+    const {notes, title, start, end } = formValues;
 
     const handleInputChange = ({target}) => {
         setFormValues({
@@ -68,7 +70,19 @@ export const CalendarModal = () => {
 
     const handleSubmitForm = (e) => {
         e.preventDefault();
-        console.log(formValues)
+
+        const momentStart = moment( start );
+        const momentEnd = moment( end );
+
+        if( momentStart.isSameOrAfter( momentEnd ) ){
+            return Swal.fire('Error','La fecha de finalizacion debe ser mayor a la fecha de inicio','error');
+        }
+        if( title.trim().length < 2 ){
+            return setTitleValid(false);
+        }
+        //realizar la grabacion en la bd
+        setTitleValid(true);
+        closeModal();
     }
     return (
         <Modal
@@ -110,7 +124,8 @@ export const CalendarModal = () => {
                     <label>Titulo y notas</label>
                     <input 
                         type="text" 
-                        className="form-control"
+                        // si titulo es invalido, se agrega la clase invalid de bootstrap
+                        className={`form-control ${ !titleValid && 'is-invalid'}`}
                         placeholder="Título del evento"
                         name="title"
                         value={title}

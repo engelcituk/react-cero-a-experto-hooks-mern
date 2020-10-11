@@ -10,13 +10,10 @@ const app = express();
 app.use( express.static('public') )
 
 //rutas
-app.get('/', (req, res) => {
+    //auth
+app.use('/api/auth', require('./routes/auth') );
+    //Crud eventos
 
-    console.log('peticion desde / ')
-    res.json({
-        ok: true,
-    });
-});
 
 //escuchar peticiones
 app.listen( process.env.PORT, () => {

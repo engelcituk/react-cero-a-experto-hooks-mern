@@ -6,12 +6,13 @@ require('dotenv').config();
 const app = express();
 
 //directorio público
-
 app.use( express.static('public') )
 
+//lectura y parseo del body
+app.use( express.json() );
+
 //rutas
-    //auth
-app.use('/api/auth', require('./routes/auth') );
+app.use('/api/auth', require('./routes/auth') ); //auth
     //Crud eventos
 
 

@@ -5,11 +5,11 @@
 const { Router} = require('express'); //desestructuro de express y obtengo a Router
 //const router = express.Router; 
 const router = Router();
-const { loginUsuario, crearUsuario, renewToken } = require('../controllers/auth');
+const { loginUsuario, crearUsuario, revalidarToken } = require('../controllers/auth');
 
-router.post('/', loginUsuario );
 router.post('/new', crearUsuario);
-router.get('/renew', renewToken );
+router.post('/', loginUsuario );
+router.get('/renew', revalidarToken );
 
 
 module.exports = router; //exporto, algo diferente a Ecma

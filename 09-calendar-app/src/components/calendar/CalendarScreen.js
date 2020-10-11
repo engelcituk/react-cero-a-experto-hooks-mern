@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Calendar, momentLocalizer} from 'react-big-calendar';
 import moment from 'moment';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 
 import { Navbar } from '../ui/Navbar';
 import { messages } from '../../helpers/calendar-messages-es';
@@ -18,18 +18,10 @@ moment.locale('es') //cambio el idioma de moment a español
 
 const localizer = momentLocalizer(moment) // or globalizeLocalizer
 
-const events = [{
-    title: 'Cumpleaños de Lu',
-    start: moment().toDate(),
-    end: moment().add(2, 'hours').toDate(),
-    bgColor: '#fafafa',
-    user: {
-        _id: '124',
-        name:' Cituk'
-    }
-}]
 
 export const CalendarScreen = () => {
+
+    const {events} = useSelector(state => state.calendar)
 
     const dispatch = useDispatch();
 
@@ -42,7 +34,7 @@ export const CalendarScreen = () => {
     const onSelectEvent = (e) => {
 
         dispatch( eventSetActive(e) );
-        dispatch( uiOpenModal() );
+        // dispatch( uiOpenModal() );
     }
 
     const onViewChange = (vista) => {

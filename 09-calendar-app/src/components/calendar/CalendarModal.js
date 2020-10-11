@@ -6,7 +6,7 @@ import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddNew, eventClearActive } from '../../actions/events';
+import { eventAddNew, eventClearActive, eventUpdated } from '../../actions/events';
 //import  'moment/locale/es';
 //moment.locale('es') //cambio el idioma de moment a español
 
@@ -99,16 +99,23 @@ export const CalendarModal = () => {
         if( title.trim().length < 2 ){
             return setTitleValid(false);
         }
-        //realizar la grabacion en la bd
-        /* se llama el action eventAddNew en actions/events y se envia el payload event */
-        dispatch( eventAddNew({
-            ...formValues,
-            id: new Date().getTime(),
-            user: {
-                _id: '353595',
-                name:'luter'
-            }
-        }) );
+
+        //para ver si edito, si existe un evento activo, mando a actualizar, sino guardo el evento
+        if(activeEvent){
+            dispatch( eventUpdated( formValues ) )
+        } else {
+            //realizar la grabacion en la bd
+            /* se llama el action eventAddNew en actions/events y se envia el payload event */
+            dispatch( eventAddNew({
+                ...formValues,
+                id: new Date().getTime(),
+                user: {
+                    _id: '353595',
+                    name:'luter'
+                }
+            }) );
+        }
+
  
         setTitleValid(true);
         closeModal();

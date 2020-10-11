@@ -6,6 +6,7 @@ import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import { uiCloseModal } from '../../actions/ui';
+import { eventAddNew } from '../../actions/events';
 //import  'moment/locale/es';
 //moment.locale('es') //cambio el idioma de moment a español
 
@@ -74,6 +75,7 @@ export const CalendarModal = () => {
     }
 
     const handleSubmitForm = (e) => {
+
         e.preventDefault();
 
         const momentStart = moment( start );
@@ -86,6 +88,16 @@ export const CalendarModal = () => {
             return setTitleValid(false);
         }
         //realizar la grabacion en la bd
+        /* se llama el action eventAddNew en actions/events y se envia el payload event */
+        dispatch( eventAddNew({
+            ...formValues,
+            id: new Date().getTime(),
+            user: {
+                _id: '353595',
+                name:'luter'
+            }
+        }) );
+ 
         setTitleValid(true);
         closeModal();
     }
@@ -109,7 +121,7 @@ export const CalendarModal = () => {
                     <label>Fecha y hora inicio</label>
                     <DateTimePicker
                         className="form-control"
-                        onChange={handleStartDateChange}
+                        onChange={ handleStartDateChange}
                         value={ dateStart }
                     />
                 </div>
@@ -118,7 +130,7 @@ export const CalendarModal = () => {
                     <label>Fecha y hora fin</label>
                     <DateTimePicker
                         className="form-control"
-                        onChange={handleEndDateChange}
+                        onChange={ handleEndDateChange}
                         minDate={ dateStart}
                         value={ dateEnd }
                     />
@@ -133,7 +145,7 @@ export const CalendarModal = () => {
                         className={`form-control ${ !titleValid && 'is-invalid'}`}
                         placeholder="Título del evento"
                         name="title"
-                        value={title}
+                        value={ title } 
                         onChange={ handleInputChange }
                         autoComplete="off"
                     />

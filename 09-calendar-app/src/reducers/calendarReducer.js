@@ -45,6 +45,20 @@ export const calendarReducer = (state = initialState, action) => {
                     e => ( e.id === action.payload.id ) ? action.payload : e
                 )
             }
+        case types.eventDeleted: // con filter busco el evento que quiero borrar, ya que con este evito regresar el evento que se está borrando 
+            return {  
+                ...state,
+                /*en el state hay una nota activa, por lo tanto al ser la activa, significa que esta es la que se está borrando
+                al dar en la acción de borrar, filter regresar la lista de objetos exceptuando el que cumple con la condición
+                */
+                events: state.events.filter(
+                    /*
+                        si el id del evento que se está evaluando es diferente de del id del evento activo, se van a regresar
+                    */
+                    e => ( e.id !== state.activeEvent.id )
+                ),
+                activeEvent: null //al quitar el evento activo, reseteo el evento activo
+            }
         default:
             return state;
     }

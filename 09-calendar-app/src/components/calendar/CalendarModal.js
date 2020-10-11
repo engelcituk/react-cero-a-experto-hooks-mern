@@ -51,8 +51,11 @@ export const CalendarModal = () => {
     const {notes, title, start, end } = formValues;
 
     useEffect(() => {
-        if(activeEvent){
-            setFormValues( activeEvent )
+
+        if( activeEvent ){
+            setFormValues( activeEvent ) // si hay un evento activo, el el modal se cargaria los datos de este
+        }else {
+            setFormValues( initEvent) //si activeEvent es nulo, se resetea todo los valores del formulario, el modal se cargaría sin datos
         }
     }, [activeEvent, setFormValues])
 
@@ -130,7 +133,8 @@ export const CalendarModal = () => {
             closeTimeoutMS={ 200 }
             overlayClassName="modal-fondo"
         >
-            <h1> Nuevo evento </h1>
+            {/* Si el evento activo existe, muestro el texto de editar evento, sino el texto sería para crear evento */}
+            <h1> { (activeEvent) ? 'Editar evento' : 'Nuevo evento' } </h1>
             <hr />
             <form
                 onSubmit={ handleSubmitForm }

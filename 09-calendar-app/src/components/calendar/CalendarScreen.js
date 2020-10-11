@@ -11,8 +11,9 @@ import { uiOpenModal } from '../../actions/ui';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import  'moment/locale/es';
-import { eventSetActive } from '../../actions/events';
+import { eventSetActive, eventClearActive } from '../../actions/events';
 import { AddNewFab } from '../ui/AddNewFab';
+import { DeleteEventFab } from '../ui/DeleteEventFab';
 
 moment.locale('es') //cambio el idioma de moment a español
 
@@ -21,7 +22,7 @@ const localizer = momentLocalizer(moment) // or globalizeLocalizer
 
 export const CalendarScreen = () => {
 
-    const {events} = useSelector(state => state.calendar)
+    const {events, activeEvent} = useSelector(state => state.calendar)
 
     const dispatch = useDispatch();
 
@@ -39,10 +40,13 @@ export const CalendarScreen = () => {
 
     const onViewChange = (vista) => {
         setLastView(vista) //modificamos el valor de la vista
-        console.log(vista)
         localStorage.setItem('lastView', vista)
     }
 
+    //cuando se hace clic en otro lado, se limpia el evento activo, por ende se oculta el botón de borrado para el evento
+    const onSelectSlot = (e) => {
+        dispatch( eventClearActive() )
+    }
     const eventStyleGetter = (event, start, end, isSelected) => {
 
         const style = {
@@ -70,6 +74,8 @@ export const CalendarScreen = () => {
                 onDoubleClickEvent= {onDoubleClick}
                 onSelectEvent= {onSelectEvent}
                 onView={onViewChange}
+                onSelectSlot={onSelectSlot}
+                selectable={ true}
                 view={lastView}
                 components={{
                     event: CalendarEvent
@@ -77,7 +83,11 @@ export const CalendarScreen = () => {
             />
 
             <CalendarModal/>
+            
+            {/* Si hay evento activo muestro el botón de eliminacion   */}
 
+            { activeEvent && <DeleteEventFab/>}
+            
             <AddNewFab/>
 
         </div>

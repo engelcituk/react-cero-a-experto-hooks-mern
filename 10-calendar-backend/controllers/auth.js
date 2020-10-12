@@ -1,6 +1,7 @@
 
 const { response } = require('express'); //requiero express para no perder el intellisense
 const Usuario = require('../models/Usuario'); //requiero al esquema del modelo Usuario
+const bcrytp = require('bcryptjs'); //para la encriptacion de contraseñas
 
 const loginUsuario = (req, res = response ) => {
 
@@ -30,7 +31,11 @@ const crearUsuario = async (req, res = response) => {
         } 
 
         usuario = new Usuario( req.body ); //se le pasa todo lo que se obtiene desde el body del request (name, email, password)
-    
+        
+        //Encriptar contraseña
+        const salt = bcrytp.genSaltSync(); //genero la sal
+        usuario.password = bcrytp.hashSync( password, salt); //encripto la contraseña usando la sal
+
         await usuario.save(); //guardo en la DB
 
         res.status(201).json({

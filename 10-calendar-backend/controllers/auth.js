@@ -1,6 +1,6 @@
 
 const {response} = require('express'); //requiero express para no perder el intellisense
-const { validationResult } = require('express-validator'); //para el resultado de la validacion 
+
 
 const loginUsuario = (req, res = response ) => {
 

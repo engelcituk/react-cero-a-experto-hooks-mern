@@ -3,15 +3,47 @@ const { response } = require('express'); //requiero express para no perder el in
 const Usuario = require('../models/Usuario'); //requiero al esquema del modelo Usuario
 const bcrytp = require('bcryptjs'); //para la encriptacion de contraseñas
 
-const loginUsuario = (req, res = response ) => {
+const loginUsuario = async (req, res = response ) => {
 
     const { email, password } = req.body;
 
-    res.status(200).json({
-        ok: true,
-        msg: 'login',
-        email, password 
-    });
+    try {
+        const usuario = await Usuario.findOne({email}); //le objeto se podria igial dejarlo así {email: email}
+
+        if( !usuario ){
+            return res.status(400).json({
+                ok: false,
+                msg: 'El usuario con ese correo no existe'
+            });
+        } 
+
+        //confirmar los passwords, compara el password que se recibe en la peticion con el password en la DB
+        const validPassword = bcrytp.compareSync(password, usuario.password );
+
+        if( !validPassword ){
+            return res.status(400).json({
+                ok: false,
+                msg: 'Password incorrecto'
+            });
+        }
+
+        //Genera nuestro JWT
+
+        res.status(200).json({
+            ok: true,
+            uid: usuario.id,
+            name: usuario.name
+        });
+
+    } catch (error) {
+
+        console.log(error)
+        res.status(500).json({
+            ok: false,
+            msg: 'Por favor hable con el admin',
+        });
+        
+    }
 }
 
 
@@ -49,8 +81,7 @@ const crearUsuario = async (req, res = response) => {
         res.status(500).json({
             ok: false,
             msg: 'Por favor hable con el admin',
-        });
-        
+        }); 
     } 
 
 

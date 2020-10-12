@@ -17,16 +17,26 @@ const loginUsuario = (req, res = response ) => {
 const crearUsuario = async (req, res = response) => {
 
     const { name, email, password } = req.body;
-
     
     try {
-        const usuario = new Usuario( req.body ); //se le pasa todo lo que se obtiene desde el body del request
+        //findOne es una promesa, retorna un objeto que cumpla esa condicion, sino regresar un null
+        let usuario = await Usuario.findOne({email}); //le objeto se podria igial dejarlo así {email: email}
 
+        if(usuario){
+            return res.status(400).json({
+                ok: false,
+                msg: 'Un usuario ya existe con ese correo'
+            });
+        } 
+
+        usuario = new Usuario( req.body ); //se le pasa todo lo que se obtiene desde el body del request (name, email, password)
+    
         await usuario.save(); //guardo en la DB
 
         res.status(201).json({
             ok: true,
-            msg: 'Registro exitoso'
+            uid: usuario.id,
+            name: usuario.name
         });
                 
     } catch (error) {

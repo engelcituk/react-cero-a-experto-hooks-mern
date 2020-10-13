@@ -2,6 +2,7 @@
 const { response } = require('express'); //requiero express para no perder el intellisense
 const Usuario = require('../models/Usuario'); //requiero al esquema del modelo Usuario
 const bcrytp = require('bcryptjs'); //para la encriptacion de contraseñas
+const { generarJWT } = require('../helpers/jwt') 
 
 const loginUsuario = async (req, res = response ) => {
 
@@ -28,11 +29,13 @@ const loginUsuario = async (req, res = response ) => {
         }
 
         //Genera nuestro JWT
+        const token = await generarJWT( usuario.id, usuario.name );
 
         res.status(200).json({
             ok: true,
             uid: usuario.id,
-            name: usuario.name
+            name: usuario.name,
+            token
         });
 
     } catch (error) {
@@ -69,11 +72,14 @@ const crearUsuario = async (req, res = response) => {
         usuario.password = bcrytp.hashSync( password, salt); //encripto la contraseña usando la sal
 
         await usuario.save(); //guardo en la DB
+        //Genera el JWT 
+        const token = await generarJWT( usuario.id, usuario.name );
 
         res.status(201).json({
             ok: true,
             uid: usuario.id,
-            name: usuario.name
+            name: usuario.name,
+            token
         });
                 
     } catch (error) {

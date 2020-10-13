@@ -89,15 +89,21 @@ const crearUsuario = async (req, res = response) => {
             msg: 'Por favor hable con el admin',
         }); 
     } 
-
-
-    
 }
 
-const revalidarToken = (req, res = response) => {
+const revalidarToken = async (req, res = response) => {
+
+    const uid = req.uid;
+    const name = req.name;
+    // const {uid, name} = req; //mas elegante con desestructuración
+
+
+    //generar un nuevo JWT y retornarlo en esta petición
+    const token = await generarJWT( uid, name );
+
     res.json({
         ok: true,
-        msg: 'renew token'
+        token
     });
 }
 

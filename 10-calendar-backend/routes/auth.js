@@ -5,6 +5,7 @@
 const { Router} = require('express'); //desestructuro de express y obtengo a Router
 const { check } = require('express-validator'); //middleware para validar campos
 const { validarCampos } = require('../middlewares/validarCampos') //middleware para verificar sino hay errores en los campos
+const { validarJwt } = require('../middlewares/validarJwt'); //middleware para validar token
 //const router = express.Router; 
 const router = Router();
 const { loginUsuario, crearUsuario, revalidarToken } = require('../controllers/auth');
@@ -30,7 +31,7 @@ router.post(
     ],
     loginUsuario
 );
-router.get('/renew', revalidarToken );
+router.get('/renew', validarJwt, revalidarToken ); // como solo es un middleware no es necesario hacer un array , iria con segundo argumento
 
 
 module.exports = router; //exporto, algo diferente a Ecma

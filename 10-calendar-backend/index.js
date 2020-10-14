@@ -20,8 +20,11 @@ app.use( express.static('public') )
 app.use( express.json() );
 
 //rutas
-app.use('/api/auth', require('./routes/auth') ); //auth
-    //Crud eventos
+//auth
+app.use('/api/auth', require('./routes/auth') ); 
+//Crud eventos
+app.use('/api/eventos', require('./routes/events') ); 
+
 
 
 //escuchar peticiones

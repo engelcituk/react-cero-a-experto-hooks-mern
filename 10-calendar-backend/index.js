@@ -25,8 +25,6 @@ app.use('/api/auth', require('./routes/auth') );
 //Crud eventos
 app.use('/api/eventos', require('./routes/events') ); 
 
-
-
 //escuchar peticiones
 app.listen( process.env.PORT, () => {
     console.log(`Servidor corriendo el puerto ${process.env.PORT}`)

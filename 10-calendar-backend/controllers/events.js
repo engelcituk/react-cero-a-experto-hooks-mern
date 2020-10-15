@@ -3,11 +3,14 @@ const { response } = require('express'); //requiero express para no perder el in
 const Evento = require('../models/Evento'); //requiero al esquema del modelo Evento
 
 
-const getEventos =  (req, res = response ) => {
+const getEventos =  async (req, res = response ) => {
+
+    //populate para traer los datos del usuario que creó el evento
+    const eventos = await Evento.find().populate('user','name'); //user es la referencia de relacion, name el campo que quiero de user
 
         res.status(200).json({
             ok: true,
-            msg: 'getEventos'
+            eventos
         });
 }
 

@@ -49,7 +49,6 @@ const actualizarEvento =  async ( req, res = response ) => {
     const idEvento = req.params.id;
     const uid = req.uid;
 
-
     try {
 
         const evento = await Evento.findById(idEvento);
@@ -92,18 +91,52 @@ const actualizarEvento =  async ( req, res = response ) => {
             ok: false,
             msg: 'Hable con el administrador'
         });
-    }
-
-    
+    } 
 
 }
 
-const eliminarEvento =  (req, res = response ) => {
-    
-    res.status(200).json({
-        ok: true,
-        msg: 'eliminar eventos'
-    });
+const eliminarEvento =  async (req, res = response ) => {
+
+    const idEvento = req.params.id;
+    const uid = req.uid;
+
+    try {
+
+        const evento = await Evento.findById(idEvento);
+
+        //si evento no existe
+        if( !evento ){
+
+            return res.status(404).json({
+                ok: false,
+                msg: 'El evento no existe en la base de datos'
+            });
+        } 
+        //verifico si la persona que quiere actualizar el evento sea el mismo que lo creó
+        if( evento.user.toString() !== uid){ //en user solo se tiene el id del usuario
+
+            return res.status(401).json({
+                ok: false,
+                msg: 'No tiene privilegio para borrar este evento'
+            });
+        }
+        //borro el evento
+        await Evento.findByIdAndDelete(idEvento);
+
+        res.status(200).json({
+            ok: true,
+            msg: 'Evento borrado exitosamente'
+        });
+        
+    } catch (error) {
+        
+        console.log(error);
+
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    } 
 
 }
 

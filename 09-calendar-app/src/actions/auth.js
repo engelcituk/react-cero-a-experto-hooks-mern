@@ -1,5 +1,6 @@
 import { types } from '../types/types';
 import { fetchSinToken } from '../helpers/fetch';
+import Swal from 'sweetalert2';
 
 export const startLogin = ( email, password ) => { 
 
@@ -15,15 +16,36 @@ export const startLogin = ( email, password ) => {
                 uid: body.uid,
                 name: body.name 
             }))
+        } else {
+            Swal.fire('Error', body.msg, 'error');
         }
     } 
-    //type: types.authStartLogin
+}
+
+export const startRegister = ( name, email, password ) => { 
+    return async ( dispatch ) => {
+        const respuesta = await fetchSinToken('auth/new', { name, email, password}, 'POST');
+        const body = await respuesta.json();
+
+        if( body.ok ){
+            localStorage.setItem('token', body.token );
+            localStorage.setItem('token-init-date', new Date().getTime() );
+
+            dispatch( login({
+                uid: body.uid,
+                name: body.name 
+            }))
+        } else {
+            Swal.fire('Error', body.msg, 'error');
+        }
+    }
 }
 
 export const login = ( user ) => ({ 
     type: types.authLogin,
     payload: user
 })
+
 
 
 export const authChecking = ( event ) => ({
@@ -38,9 +60,6 @@ export const authCheckingFinish = ( event ) => ({
 
 
 
-export const authStartRegister = ( event ) => ({ 
-    type: types.authStartRegister
-})
 
 export const authStartTokenRenew = ( event ) => ({ 
     type: types.authStartTokenRenew,

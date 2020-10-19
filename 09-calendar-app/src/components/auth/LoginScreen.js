@@ -20,7 +20,6 @@ export const LoginScreen = () => {
         rEmail: 'mylu@gmail.com',
         rPassword1:'123456',
         rPassword2:'123456'
-
     });
 
     const { lEmail, lPassword } = formLoginValues;

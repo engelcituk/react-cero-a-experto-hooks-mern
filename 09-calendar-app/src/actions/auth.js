@@ -64,6 +64,16 @@ export const startChecking = (  ) => {
     }
 }
 
+export const startLogout = ( ) => {
+    return  async ( dispatch ) => {
+
+        localStorage.clear();
+        dispatch( logout() );
+
+    }
+}
+
+
 export const checkingFinish = () => ({ 
     type: types.authCheckingFinish
 })
@@ -74,17 +84,4 @@ export const login = ( user ) => ({
 })
 
 
-
-
-
-
-
-
-export const authStartTokenRenew = ( event ) => ({ 
-    type: types.authStartTokenRenew,
-    payload: event
-})
-
-export const authLogout = ( event ) => ({ 
-    type: types.authLogout
-})
+export const logout = () => ({ type: types.authLogout })

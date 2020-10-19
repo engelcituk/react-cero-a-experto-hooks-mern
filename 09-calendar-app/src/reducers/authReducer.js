@@ -6,7 +6,7 @@ const initialState = {
     name: null */
 }
 
-export const authReducer = ( state= initialState, action) => {
+export const authReducer = ( state = initialState, action) => {
 
     switch ( action.type ) {
 
@@ -20,6 +20,10 @@ export const authReducer = ( state= initialState, action) => {
             return {
                 ...state,
                 checking: false
+            }
+        case types.authLogout:
+            return {
+                checking: false // no es necesario regresar todo el state
             }
         default:
             return state;
